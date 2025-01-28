@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Functions Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Functions Demo</h1>
+
+  <!-- Calculate area -->
+  <h3>Calculate Rectangle Area</h3>
+  <input id="width" type="number" placeholder="Width" />
+  <input id="height" type="number" placeholder="Height" />
+  <button onclick="displayArea()">Calculate Area</button>
+  <p id="area-result"></p>
+
+  <!-- Scope example -->
+  <h3>Scope Demonstration</h3>
+  <button onclick="updateMessage()">Update Message</button>
+  <p id="scope-message"></p>
+
+  <!-- Modal with toggle -->
+  <h3>Toggle Modal</h3>
+  <button onclick="toggleModal()">Show/Hide Modal</button>
+  <div id="overlay" class="hidden overlay" onclick="toggleModal()"></div>
+  <div id="modal" class="hidden modal">
+    <p>This is a modal. Click outside to close.</p>
+  </div>
+
+  <script>
+    // Function with parameters and return values
+    function calculateArea(width, height) {
+      return width * height;
+    }
+
+    function displayArea() {
+      const width = parseFloat(document.getElementById('width').value);
+      const height = parseFloat(document.getElementById('height').value);
+
+      if (!isNaN(width) && !isNaN(height)) {
+        const area = calculateArea(width, height);
+        document.getElementById('area-result').innerText = `Area: ${area}`;
+      } else {
+        document.getElementById('area-result').innerText = 'Please enter valid numbers.';
+      }
+    }
+
+    // Function demonstrating scope (local vs. global variables)
+    let globalMessage = "This is a global message.";
+
+    function updateMessage() {
+      const localMessage = "This is a local message.";
+      document.getElementById('scope-message').innerText = `${globalMessage} | ${localMessage}`;
+    }
+
+    // Function to toggle CSS class (e.g., showing or hiding a modal)
+    function toggleModal() {
+      const modal = document.getElementById('modal');
+      const overlay = document.getElementById('overlay');
+      modal.classList.toggle('hidden');
+      overlay.classList.toggle('hidden');
+    }
+  </script>
+</body>
+</html>
